@@ -1,0 +1,1 @@
+https://gitlab.collabora.com/rpavlik/android-jni-wrappers/-/tree/main/

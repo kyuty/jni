@@ -1,0 +1,157 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "definitions": {
+        "config_entry": {
+            "type": "object",
+            "properties": {
+                "base": {
+                    "type": "string",
+                    "title": "Expose base class",
+                    "description": "Fully-qualified .-delimited class name of a base class to expose in the generated wrapper."
+                },
+                "droppable": {
+                    "type": "boolean",
+                    "title": "Droppable?",
+                    "description": "Whether a global reference to the class can be dropped after getting method/field IDs.",
+                    "default": true
+                },
+                "deferDrop": {
+                    "type": "boolean",
+                    "title": "Allow deferring a drop?",
+                    "description": "Whether dropping a global reference to the class can be dropped at some point later than after getting method/field IDs. Implies droppable.",
+                    "default": false
+                },
+                "staticInit": {
+                    "type": "boolean",
+                    "title": "Static init?",
+                    "description": "Whether a static member should be added to explicitly instantiate the metadata with a jclass.",
+                    "default": false
+                },
+                "provideQualifiedName": {
+                    "type": "boolean",
+                    "title": "Provide qualified name?",
+                    "description": "Whether a the .-delimited fully-qualified name should be exposed in a constexpr way.",
+                    "default": false
+                },
+                "extraMembers": {
+                    "type": "array",
+                    "title": "Extra Members to Wrap",
+                    "description": "Members that don't appear in javap output that you want a wrapper for.",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "title": "Member name"
+                        },
+                        "static": {
+                            "type": "boolean",
+                            "title": "Is member static?"
+                        },
+                        "jniSignature": {
+                            "type": "string",
+                            "title": "JNI Signature"
+                        }
+                    },
+                    "required": [
+                        "name",
+                        "static",
+                        "jniSignature"
+                    ]
+                }
+            },
+            "additionalProperties": false
+        },
+        "member": {
+            "title": "Member to Wrap",
+            "type": "string",
+            "description": "Provide a member name to wrap/expose to C++."
+        },
+        "globalOptions": {
+            "type": "object",
+            "title": "Additional global options",
+            "properties": {
+                "headerExtension": {
+                    "title": "File header extension for files we generate",
+                    "type": "string",
+                    "default": "h"
+                },
+                "knownIncludes": {
+                    "title": "Known include paths",
+                    "description": "If an include matches the stem (filename without extension) of one of these entries, the entry will be used instead.",
+                    "type": "array",
+                    "additionalItems": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "class": {
+            "title": "Class",
+            "description": "Each key is a class to wrap. Indicate nested classes with EnclosingClass$NestedClass",
+            "type": "array",
+            "minItems": 0,
+            "items": [
+                {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/config_entry"
+                        },
+                        {
+                            "$ref": "#/definitions/member"
+                        }
+                    ]
+                }
+            ],
+            "additionalItems": {
+                "$ref": "#/definitions/member"
+            }
+        },
+        "packageOptions": {
+            "type": "object",
+            "title": "Package options",
+            "properties": {
+                "directory": {
+                    "type": "string",
+                    "title": "Output directory",
+                    "default": "wrap"
+                }
+            }
+        },
+        "package": {
+            "type": "object",
+            "title": "Package",
+            "description": "Keys must be a .-delimited Java package name",
+            "patternProperties": {
+                "^#.*": {
+                    "title": "Keys starting with # are ignored"
+                }
+            },
+            "properties": {
+                "$packageOptions": {
+                    "$ref": "#/definitions/packageOptions"
+                }
+            },
+            "additionalProperties": {
+                "$ref": "#/definitions/class"
+            }
+        }
+    },
+    "title": "android-jni-wrappers config file",
+    "type": "object",
+    "description": "Each key is a Java package to wrap. The value indicates which classes in the package to wrap.",
+    "patternProperties": {
+        "^#.*": {
+            "title": "Keys starting with # are ignored"
+        },
+        "^[$].*": {
+            "title": "Keys starting with $ (like $schema) are ignored"
+        }
+    },
+    "properties": {
+        "$globalOptions": {
+            "$ref": "#/definitions/globalOptions"
+        }
+    },
+    "additionalProperties": {
+        "$ref": "#/definitions/package"
+    }
+}

@@ -1,0 +1,267 @@
+{
+    "$schema": "./wrapped.schema.json",
+    "android.app": {
+        "Service": [
+            {
+                "base": "android.content.Context"
+            }
+        ],
+        "Activity": [
+            {
+                "base": "android.content.Context"
+            },
+            "setVrModeEnabled",
+            "getSystemService"
+        ]
+    },
+    "android.os": {
+        "BaseBundle": [
+            "containsKey",
+            "getString"
+        ],
+        "Bundle": [
+            {
+                "base": "android.os.BaseBundle"
+            }
+        ],
+        "ParcelFileDescriptor": [
+            "detachFd",
+            "getFd",
+            "checkError",
+            "adoptFd",
+            "close"
+        ]
+    },
+    "android.content": {
+        "Context": [
+            {
+                "deferDrop": true
+            },
+            "getClassLoader",
+            "getApplicationContext",
+            "createPackageContext",
+            "getPackageManager",
+            "startActivity",
+            "getContentResolver",
+            "WINDOW_SERVICE",
+            "DISPLAY_SERVICE"
+        ],
+        "ContentUris": [
+            {
+                "deferDrop": true
+            },
+            "appendId"
+        ],
+        "ComponentName": [
+            {
+                "droppable": false
+            },
+            "<init>"
+        ],
+        "Intent": [
+            {
+                "droppable": false
+            },
+            "<init>",
+            "FLAG_ACTIVITY_NEW_TASK",
+            "setFlags"
+        ],
+        "ContentResolver": [
+            "query"
+        ]
+    },
+    "android.content.pm": {
+        "PackageItemInfo": [
+            "packageName",
+            "metaData",
+            "name"
+        ],
+        "ComponentInfo": [
+            {
+                "base": "android.content.pm.PackageItemInfo"
+            }
+        ],
+        "ServiceInfo": [
+            {
+                "base": "android.content.pm.PackageItemInfo"
+            }
+        ],
+        "ApplicationInfo": [
+            {
+                "base": "android.content.pm.PackageItemInfo"
+            },
+            "publicSourceDir",
+            "nativeLibraryDir"
+        ],
+        "PackageInfo": [
+            "applicationInfo",
+            "packageName"
+        ],
+        "ResolveInfo": [
+            "serviceInfo"
+        ],
+        "PackageManager": [
+            "getPackageInfo",
+            "getApplicationInfo",
+            "queryIntentServices"
+        ]
+    },
+    "android.database": {
+        "Cursor": [
+            "getString",
+            "getInt",
+            "getCount",
+            "moveToFirst",
+            "moveToNext",
+            "getColumnIndex",
+            "close"
+        ]
+    },
+    "android.service.vr": {
+        "VrListenerService": [
+            {
+                "base": "android.app.Service",
+                "droppable": false
+            },
+            "isVrModePackageEnabled"
+        ]
+    },
+    "android.util": {
+        "DisplayMetrics": [
+            "widthPixels",
+            "heightPixels"
+        ]
+    },
+    "android.provider": {
+        "Settings": [
+            {
+                "droppable": false
+            },
+            "ACTION_VR_LISTENER_SETTINGS"
+        ]
+    },
+    "dalvik.system": {
+        "DexClassLoader": [
+            {
+                "droppable": false
+            },
+            "<init>"
+        ]
+    },
+    "java.lang": {
+        "Class": [
+            {
+                "droppable": false
+            },
+            "getCanonicalName",
+            "forName"
+        ],
+        "ClassLoader": [
+            {
+                "extraMembers": [
+                    {
+                        "name": "findLibrary",
+                        "static": false,
+                        "jniSignature": "(Ljava/lang/String;)Ljava/lang/String;"
+                    }
+                ]
+            },
+            "loadClass",
+            "findLibrary"
+        ],
+        "System": [
+            {
+                "droppable": false
+            },
+            "mapLibraryName"
+        ],
+        "Math": [
+            "ceil"
+        ]
+    },
+    "android.net": {
+        "Uri": [],
+        "Uri$Builder": [
+            "<init>",
+            "authority",
+            "appendPath",
+            "build",
+            "scheme"
+        ]
+    },
+    "android.view": {
+        "Display": [
+            "getRealSize",
+            "getRealMetrics"
+        ],
+        "Surface": [
+            "isValid"
+        ],
+        "SurfaceHolder": [
+            "getSurface"
+        ]
+    },
+    "android.graphics": {
+        "Point": [
+            "x",
+            "y"
+        ],
+        "Bitmap": [
+            "createBitmap",
+            "eraseColor",
+            "compress"
+        ],
+        "Paint": [
+            "setTextSize",
+            "setAntiAlias",
+            "setFilterBitmap",
+            "getTextSize",
+            "ascent",
+            "descent",
+            "measureText",
+            "<init>",
+            "setColor"
+        ],
+        "Canvas": [
+            "<init>",
+            "drawText"
+        ],
+        "Color": [
+            "BLACK",
+            "YELLOW"
+        ]
+    },
+    "android.text": {
+        "TextUtils": [
+            "ellipsize"
+        ]
+    },
+    "android.widget": {
+        "Toast": [
+            {
+                "droppable": false
+            },
+            "LENGTH_LONG",
+            "LENGTH_SHORT",
+            "makeText",
+            "show"
+        ]
+    },
+    "java.util": {
+        "List": [
+            "get",
+            "size"
+        ]
+    },
+    "java.io": {
+        "File": [
+            "<init>",
+            "exists",
+            "mkdirs"
+        ],
+        "FileOutputStream": [
+            "<init>",
+            "close"
+        ]
+    }
+}

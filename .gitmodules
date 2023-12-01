@@ -1,0 +1,3 @@
+[submodule "5_AndroidJniDemo"]
+	path = 5_AndroidJniDemo
+	url = https://github.com/kyuty/5_AndroidJniDemo.git

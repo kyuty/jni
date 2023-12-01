@@ -1,0 +1,107 @@
+{
+    "#1": "This config is intended for generating wrappers around the classes included in Monado.",
+    "#2": "Use those wrappers in conjunction with the Java and Android Platform wrappers made with the",
+    "#3": "default config.",
+    "$schema": "./wrapped.schema.json",
+    "$globalOptions": {
+        "headerExtension": "hpp",
+        "knownIncludes": [
+            "wrap/android.app.h",
+            "wrap/android.content.h",
+            "wrap/android.content.pm.h",
+            "wrap/android.database.h",
+            "wrap/android.graphics.h",
+            "wrap/android.net.h",
+            "wrap/android.os.h",
+            "wrap/android.provider.h",
+            "wrap/android.service.vr.h",
+            "wrap/android.util.h",
+            "wrap/android.view.h",
+            "wrap/android.widget.h",
+            "wrap/dalvik.system.h",
+            "wrap/java.lang.h",
+            "wrap/java.util.h",
+            "wrap/ObjectWrapperBase.h"
+        ]
+    },
+    "org.freedesktop.monado.auxiliary": {
+        "$packageOptions": {
+            "directory": "wrap/xrt/auxiliary/android"
+        },
+        "MonadoView": [
+            {
+                "droppable": false,
+                "staticInit": true,
+                "provideQualifiedName": true
+            },
+            "attachToActivity",
+            "markAsDiscardedByNative",
+            "waitGetSurfaceHolder",
+            "getNativePointer",
+            "getDisplayMetrics"
+        ]
+    },
+    "org.freedesktop.monado.ipc": {
+        "$packageOptions": {
+            "directory": "wrap/xrt/ipc/android"
+        },
+        "Client": [
+            {
+                "droppable": false,
+                "staticInit": true,
+                "provideQualifiedName": true
+            },
+            "<init>",
+            "blockingConnect",
+            "failed",
+            "monado",
+            "markAsDiscardedByNative"
+        ],
+        "IMonado": [
+            {
+                "droppable": false
+            },
+            "passAppSurface"
+        ]
+    },
+    "##": "Don't actually generate the packages below from this config...",
+    "android.app": {
+        "Activity": [
+            {
+                "base": "android.content.Context"
+            },
+            "setVrModeEnabled",
+            "getSystemService"
+        ]
+    },
+    "android.content": {
+        "Context": [
+            "getClassLoader",
+            "getApplicationContext",
+            "createPackageContext",
+            "getPackageManager",
+            "startActivity",
+            "getContentResolver",
+            "WINDOW_SERVICE",
+            "DISPLAY_SERVICE"
+        ]
+    },
+    "android.view": {
+        "Display": [
+            "getRealSize",
+            "getRealMetrics"
+        ],
+        "Surface": [
+            "isValid"
+        ],
+        "SurfaceHolder": [
+            "getSurface"
+        ]
+    },
+    "android.graphics": {
+        "Point": [
+            "x",
+            "y"
+        ]
+    }
+}
